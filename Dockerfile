@@ -1,5 +1,7 @@
 FROM java:8u111
 MAINTAINER YangJin <490779927@qq.com>
-copy . /usr/local/src/springboot.jar
+ADD demo-0.0.1-SNAPSHOT.jar springboot.jar
+RUN sh -c 'touch /app.jar'
+ENV JAVA_OPTS=""
 EXPOSE 9111
-ENTRYPOINT ["java","-jar","/usr/local/src/springboot.jar"]
+ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /springboot.jar" ]
